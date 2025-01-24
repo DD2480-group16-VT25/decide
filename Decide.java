@@ -54,6 +54,7 @@ public class Decide {
     boolean launch;
 
 
+    public static void main(String[] args) {
 
-
+    }
 }
