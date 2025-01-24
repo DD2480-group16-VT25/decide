@@ -53,6 +53,9 @@ public class Decide {
     // Decision: Launch or Not Launch
     boolean launch;
 
+    public void decide(){
+        launch = true;
+    }
 
     public static void main(String[] args) {
         
