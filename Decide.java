@@ -9,7 +9,7 @@ public class Decide {
 
     // Inputs to the DECIDE() function
     public class PARAMETERS_T {
-        double LENTH1;          
+        double LENGTH1;          
         double RADIUS1;
         double EPSILON;
         double AREA1;
@@ -25,7 +25,7 @@ public class Decide {
         int E_PTS;
         int F_PTS;
         int G_PTS;
-        double LENTH2;
+        double LENGTH2;
         double RADIUS2;
         double AREA2;
     }
@@ -55,7 +55,30 @@ public class Decide {
 
     // Decision: Launch or Not Launch
     boolean launch;
-    
+        
+    ///////////////////////////////////////
+
+    /*
+     * There exists atleast one set of two consecutive data points 
+     * that are greater distance than the length LENGTH1 apart
+     * @author Marcus Odin
+     * @return
+     */
+    public boolean lic0(){
+        if(NUMPOINTS != COORDINATES.length){
+            throw new IllegalArgumentException("NUMPOINTS does not match the amount of coordinates in COORDINATES");
+        }
+        if(PARAMETERS.LENGTH1 < 0){
+            throw new IllegalArgumentException("LENGTH1 is less than 0");
+        }
+
+        for(int i = 1; i < COORDINATES.length; i++){
+            if(COORDINATES[i-1].distance(COORDINATES[i]) > PARAMETERS.LENGTH1){
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void decide(){
         launch = true;
