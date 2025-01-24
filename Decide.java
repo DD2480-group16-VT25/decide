@@ -32,6 +32,9 @@ public class Decide {
 
     public PARAMETERS_T PARAMETERS;
 
+    // Number of points
+    public int NUMPOINTS;
+
     // 100 x and y coordinates
     public Point2D[] COORDINATES = new Point2D[100];
 
@@ -52,6 +55,7 @@ public class Decide {
 
     // Decision: Launch or Not Launch
     boolean launch;
+    
 
     public void decide(){
         launch = true;
