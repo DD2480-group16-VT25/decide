@@ -41,6 +41,37 @@ public class Tests {
     }
 
     @Test
+    public void lic1IsTrueInNormalCase()
+    {
+        decide.PARAMETERS.RADIUS1 = 4;
+        decide.NUMPOINTS = 6;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(0,0),
+            new Point2D.Double(2,2),
+            new Point2D.Double(2,3),
+            new Point2D.Double(3,4),
+            new Point2D.Double(20,15),
+            new Point2D.Double(22,18)
+        };
+        assertTrue(decide.lic0());
+    }
+
+    @Test
+    public void lic1IsFalseInNormalCase(){
+        decide.PARAMETERS.LENGTH1 = 10;
+        decide.NUMPOINTS = 6;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(0,0),
+            new Point2D.Double(1,1),
+            new Point2D.Double(2,2),
+            new Point2D.Double(3,3),
+            new Point2D.Double(4,4),
+            new Point2D.Double(4,5)
+        };
+        assertFalse(decide.lic0());
+    }
+
+    @Test
     public void lic4IsTrueInNormalCase() {
         decide.PARAMETERS.Q_PTS = 4;
         decide.PARAMETERS.QUADS = 2;
