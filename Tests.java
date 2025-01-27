@@ -73,4 +73,38 @@ public class Tests {
 
         assertTrue(decide.lic8());
     }
+
+    @Test
+    public void lic9IsTrueInNormalCase() {
+        decide.NUMPOINTS = 5;
+        decide.PARAMETERS.C_PTS = 1;
+        decide.PARAMETERS.D_PTS = 1;
+        decide.PARAMETERS.EPSILON = 1; // => angle < 2.1415... or angle > 4.1415...
+        decide.COORDINATES = new Point2D[] {
+                new Point2D.Double(0, 2),
+                new Point2D.Double(-1, -1),
+                new Point2D.Double(2, 0),
+                new Point2D.Double(-1, -1),
+                new Point2D.Double(4, 2)
+        }; // angle = 1.57...
+
+        assertTrue(decide.lic9());
+    }
+
+    @Test
+    public void lic9IsFalseInNormalCase() {
+        decide.NUMPOINTS = 5;
+        decide.PARAMETERS.C_PTS = 1;
+        decide.PARAMETERS.D_PTS = 1;
+        decide.PARAMETERS.EPSILON = 2; // => angle < 1.1514... or angle > 5.1415...
+        decide.COORDINATES = new Point2D[] {
+                new Point2D.Double(0, 1),
+                new Point2D.Double(-1, -1),
+                new Point2D.Double(0, 0),
+                new Point2D.Double(-1, -1),
+                new Point2D.Double(1, 0)
+        }; // angle = 1.57...
+
+        assertFalse(decide.lic9());
+    }
 }
