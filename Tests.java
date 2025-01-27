@@ -141,4 +141,30 @@ public class Tests {
 
         assertFalse(decide.lic10());
     }
+
+    @Test
+    public void lic11IsTrueInNormalCase() {
+        decide.NUMPOINTS = 3;
+        decide.PARAMETERS.G_PTS = 1;
+        decide.COORDINATES = new Point2D[] {
+                new Point2D.Double(1, 0),
+                new Point2D.Double(-1, -1),
+                new Point2D.Double(0, 0),
+        }; // X[0] > X[2]
+
+        assertTrue(decide.lic11());
+    }
+
+    @Test
+    public void lic11IsFalseInNormalCase() {
+        decide.NUMPOINTS = 3;
+        decide.PARAMETERS.G_PTS = 1;
+        decide.COORDINATES = new Point2D[] {
+                new Point2D.Double(0, 0),
+                new Point2D.Double(-1, -1),
+                new Point2D.Double(1, 0),
+        }; // X[0] < X[2]
+
+        assertFalse(decide.lic11());
+    }
 }

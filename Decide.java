@@ -234,6 +234,38 @@ public class Decide {
         return false;
     }
 
+    /*
+     * There exists at least one set of two data points, (X[i],Y[i]) and
+     * (X[j],Y[j]), separated by exactly G_PTS consecutive intervening points, such
+     * that X[j] - X[i] < 0. (where i < j ) The condition is not met when NUMPOINTS
+     * < 3.
+     * 
+     * 1 <= G_PTS <= NUMPOINTS -2
+     * 
+     * @author Linus Dinesjö
+     * 
+     * @return true if the condition is met, false otherwise
+     */
+    public boolean lic11() {
+        if (NUMPOINTS != COORDINATES.length) {
+            throw new IllegalArgumentException("NUMPOINTS does not match the amount of coordinates in COORDINATES");
+        }
+        if (PARAMETERS.G_PTS < 1 || PARAMETERS.G_PTS > NUMPOINTS - 2) {
+            throw new IllegalArgumentException("G_PTS is not valid");
+        }
+        if (NUMPOINTS < 3) {
+            return false;
+        }
+
+        for (int i = 0; i < NUMPOINTS - PARAMETERS.G_PTS - 1; i++) {
+            if (COORDINATES[i].getX() > COORDINATES[i + PARAMETERS.G_PTS + 1].getX()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public void decide() {
         launch = true;
     }
