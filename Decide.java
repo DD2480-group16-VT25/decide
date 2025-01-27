@@ -83,6 +83,51 @@ public class Decide {
     }
 
     /*
+    * There exists at least one set of three consecutive data points that cannot all be contained
+    * within or on a circle of radius RADIUS1.
+    * (0 ≤ RADIUS1)
+    *
+    * @author Robin Gunnarsson
+    * @return true if condition is met, otherwise false
+    */
+
+    public boolean lic1(){
+        if(NUMPOINTS != COORDINATES.length){
+            throw new IllegalArgumentException("NUMPOINTS does not match the amount of coordinates in COORDINATES");
+        }
+        if(PARAMETERS.RADIUS1 <= 0){
+            throw new IllegalArgumentException("RADIUS1 is less than, or equal to, 0");
+        }
+
+        for(int i = 2; i < COORDINATES.length; i++){
+            Point2D[] circlePoints = new Point2D[3];
+            double sum_x = 0, sum_y = 0, x, y;
+
+            circlePoints[0] = COORDINATES[i-2];
+            circlePoints[1] = COORDINATES[i-1];
+            circlePoints[2] = COORDINATES[i];
+
+            for(int j = 0; j < circlePoints.length; j++){
+                x = COORDINATES[i + j].getX();
+                y = COORDINATES[i + j].getY();
+
+                sum_x = sum_x + x;
+                sum_y = sum_y + y; 
+            }
+            
+            //Calculates ther center of the three coordinates that is used to determine if any coordinate lies outside the cicle
+            Point2D centerPoint = new Point2D.Double(sum_x / circlePoints.length, sum_y / circlePoints.length);
+
+            for(int k = 0; k < circlePoints.length; k++){
+                if(circlePoints[k].distance(centerPoint) > PARAMETERS.RADIUS1){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /*
     * There exists at least one set of Q_PTS consecutive data points that lie in more than QUADS
     * quadrants. Where there is ambiguity as to which quadrant contains a given point, priority
     * of decision will be by quadrant number, i.e., I, II, III, IV. For example, the data point (0,0)
