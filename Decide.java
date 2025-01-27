@@ -9,7 +9,7 @@ public class Decide {
 
     // Inputs to the DECIDE() function
     public class PARAMETERS_T {
-        double LENGTH1;          
+        double LENGTH1;
         double RADIUS1;
         double EPSILON;
         double AREA1;
@@ -55,11 +55,11 @@ public class Decide {
 
     // Decision: Launch or Not Launch
     boolean launch;
-        
+
     ///////////////////////////////////////
 
     /*
-     * There exists atleast one set of two consecutive data points 
+     * There exists atleast one set of two consecutive data points
      * that are greater distance than the length LENGTH1 apart
      * @author Marcus Odin
      * @return
@@ -80,11 +80,56 @@ public class Decide {
         return false;
     }
 
-    public void decide(){
+    /*
+     * There exists at least one set of three data points separated by exactly A_PTS
+     * and B_PTS consecutive intervening points, respectively, that cannot be
+     * contained within or on a circle of radius RADIUS1. The condition is not met
+     * when NUMPOINTS < 5.
+     * 
+     * @author Linus Dinesjö
+     * 
+     * @return true if the condition is met, false otherwise
+     */
+    public boolean lic8() {
+        if (NUMPOINTS != COORDINATES.length) {
+            throw new IllegalArgumentException("NUMPOINTS does not match the amount of coordinates in COORDINATES");
+        }
+        if (PARAMETERS.A_PTS < 1 || PARAMETERS.B_PTS < 1 || PARAMETERS.A_PTS + PARAMETERS.B_PTS > NUMPOINTS - 3) {
+            throw new IllegalArgumentException("A_PTS and B_PTS are not valid");
+        }
+        if (NUMPOINTS < 5) {
+            return false;
+        }
+
+        for (int i = 0; i < NUMPOINTS - PARAMETERS.A_PTS - PARAMETERS.B_PTS - 2; i++) {
+            Point2D[] circlePoints = new Point2D[3];
+            circlePoints[0] = COORDINATES[i];
+            circlePoints[1] = COORDINATES[i + PARAMETERS.A_PTS + 1];
+            circlePoints[2] = COORDINATES[i + PARAMETERS.A_PTS + PARAMETERS.B_PTS + 2];
+            // Get maximum distance between two of the three points
+            double maxDistance = 0;
+            for (int j = 0; j < 3; j++) {
+                for (int k = j + 1; k < 3; k++) {
+                    double distance = circlePoints[j].distance(circlePoints[k]);
+                    if (distance > maxDistance) {
+                        maxDistance = distance;
+                    }
+                }
+            }
+
+            if (maxDistance > 2 * PARAMETERS.RADIUS1) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void decide() {
         launch = true;
     }
 
     public static void main(String[] args) {
-        
+
     }
 }

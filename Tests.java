@@ -40,4 +40,37 @@ public class Tests {
         assertFalse(decide.lic0());
     }
 
+    @Test
+    public void lic8IsFalseInNormalCase() {
+        decide.NUMPOINTS = 5;
+        decide.PARAMETERS.A_PTS = 1;
+        decide.PARAMETERS.B_PTS = 1;
+        decide.PARAMETERS.RADIUS1 = 3;
+        decide.COORDINATES = new Point2D[] {
+                new Point2D.Double(0, 0),
+                new Point2D.Double(0, 1),
+                new Point2D.Double(0, 2),
+                new Point2D.Double(0, 3),
+                new Point2D.Double(0, 4)
+        };
+
+        assertFalse(decide.lic8());
+    }
+
+    @Test
+    public void lic8IsTrueInNormalCase() {
+        decide.NUMPOINTS = 5;
+        decide.PARAMETERS.A_PTS = 1;
+        decide.PARAMETERS.B_PTS = 1;
+        decide.PARAMETERS.RADIUS1 = 1;
+        decide.COORDINATES = new Point2D[] {
+                new Point2D.Double(0, 0),
+                new Point2D.Double(0, 1),
+                new Point2D.Double(0, 2),
+                new Point2D.Double(0, 3),
+                new Point2D.Double(0, 4)
+        };
+
+        assertTrue(decide.lic8());
+    }
 }
