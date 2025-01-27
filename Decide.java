@@ -184,6 +184,56 @@ public class Decide {
         return false;
     }
 
+    /*
+     * There exists at least one set of three data points separated by exactly E_PTS
+     * and F_PTS consecutive intervening points, respectively, that are the vertices
+     * of a triangle with area greater than AREA1. The condition is not met when
+     * NUMPOINTS < 5.
+     * 
+     * 1 <= E_PTS, 1 <= F_PTS
+     * E_PTS + F_PTS <= NUMPOINTS -3
+     * 
+     * @author Linus Dinesjö
+     * 
+     * @return true if the condition is met, false otherwise
+     */
+    public boolean lic10() {
+        if (NUMPOINTS != COORDINATES.length) {
+            throw new IllegalArgumentException("NUMPOINTS does not match the amount of coordinates in COORDINATES");
+        }
+        if (PARAMETERS.E_PTS < 1 || PARAMETERS.F_PTS < 1 || PARAMETERS.E_PTS + PARAMETERS.F_PTS > NUMPOINTS - 3) {
+            throw new IllegalArgumentException("E_PTS and F_PTS are not valid");
+        }
+        if (NUMPOINTS < 5) {
+            return false;
+        }
+
+        for (int i = 0; i < NUMPOINTS - PARAMETERS.E_PTS - PARAMETERS.F_PTS - 2; i++) {
+            Point2D[] trianglePoints = new Point2D[3];
+            trianglePoints[0] = COORDINATES[i];
+            trianglePoints[1] = COORDINATES[i + PARAMETERS.E_PTS + 1];
+            trianglePoints[2] = COORDINATES[i + PARAMETERS.E_PTS + PARAMETERS.F_PTS + 2];
+
+            // If triangle "undefined", continue to next set of points
+            if (trianglePoints[0].equals(trianglePoints[1]) || trianglePoints[1].equals(trianglePoints[2])) {
+                continue;
+            }
+
+            // Area of a triangle using Heron's formula
+            double a = trianglePoints[0].distance(trianglePoints[1]);
+            double b = trianglePoints[0].distance(trianglePoints[2]);
+            double c = trianglePoints[1].distance(trianglePoints[2]);
+            double s = (a + b + c) / 2; // semi-perimeter
+            double area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+
+            if (area > PARAMETERS.AREA1) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public void decide() {
         launch = true;
     }

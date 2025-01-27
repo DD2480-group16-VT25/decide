@@ -107,4 +107,38 @@ public class Tests {
 
         assertFalse(decide.lic9());
     }
+
+    @Test
+    public void lic10IsTrueInNormalCase() {
+        decide.NUMPOINTS = 5;
+        decide.PARAMETERS.E_PTS = 1;
+        decide.PARAMETERS.F_PTS = 1;
+        decide.PARAMETERS.AREA1 = 1.7;
+        decide.COORDINATES = new Point2D[] {
+                new Point2D.Double(0, 2),
+                new Point2D.Double(-1, -1),
+                new Point2D.Double(0, 0),
+                new Point2D.Double(-1, -1),
+                new Point2D.Double(2, 0)
+        }; // area = 2
+
+        assertTrue(decide.lic10());
+    }
+
+    @Test
+    public void lic10IsFalseInNormalCase() {
+        decide.NUMPOINTS = 5;
+        decide.PARAMETERS.E_PTS = 1;
+        decide.PARAMETERS.F_PTS = 1;
+        decide.PARAMETERS.AREA1 = 2.3;
+        decide.COORDINATES = new Point2D[] {
+                new Point2D.Double(0, 2),
+                new Point2D.Double(-1, -1),
+                new Point2D.Double(0, 0),
+                new Point2D.Double(-1, -1),
+                new Point2D.Double(2, 0)
+        }; // area = 2
+
+        assertFalse(decide.lic10());
+    }
 }
