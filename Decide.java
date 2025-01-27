@@ -127,6 +127,27 @@ public class Decide {
 
         return false;
     }
+
+    /*
+     * There exists at least one set of two consecutive data points, (X[i],Y[i]) and (X[j],Y[j]), such that 
+     * X[j] - X[i] < 0. (where i = j-1)
+     * 
+     * @author Ellen Sigurðardóttir
+     */
+
+    public boolean lic5() {
+        if (NUMPOINTS < 2) {
+            throw new IllegalArgumentException("Not enough NUMPOINTS for two consecutive data points.");
+        }
+
+        for (int i = 0; i < NUMPOINTS - 1; i++) {
+            if (COORDINATES[i].getX() > COORDINATES[i + 1].getX()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
   
     /*
      * There exists at least one set of three data points separated by exactly A_PTS
