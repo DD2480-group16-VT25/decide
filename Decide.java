@@ -49,14 +49,14 @@ public class Decide {
     // Preliminary Unlocking Matrix (PUM)
     boolean[][] PUM = new boolean[15][15];
 
-    // Conditions Met Vecttor (CMV)
+    // Conditions Met Vector (CMV)
     boolean []CMV = new boolean[15];
 
     // Final Unlocking Vector (FUV)
     boolean[] FUV = new boolean[15];
 
     // Decision: Launch or Not Launch
-    boolean launch;
+    public boolean launch;
 
     ///////////////////////////////////////
 
@@ -616,7 +616,63 @@ public class Decide {
     }
 
     public void decide(){
+        // Populate CMV
+        CMV[0] = lic0();
+        CMV[1] = lic1();
+        CMV[2] = lic2();
+        CMV[3] = lic3();
+        CMV[4] = lic4();
+        CMV[5] = lic5();
+        CMV[6] = lic6();
+        CMV[7] = lic7();
+        CMV[8] = lic8();
+        CMV[9] = lic9();
+        CMV[10] = lic10();
+        CMV[11] = lic11();
+        CMV[12] = lic12();
+        // TODO: Add remaining LICs
+
+        // Calculate PUM
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                if (LCM[i][j] == CONNECTORS.ANDD) {
+                    PUM[i][j] = CMV[i] && CMV[j];
+                } else if (LCM[i][j] == CONNECTORS.ORR) {
+                    PUM[i][j] = CMV[i] || CMV[j];
+                } else if (LCM[i][j] == CONNECTORS.NOTUSED) {
+                    PUM[i][j] = true;
+                }
+            }
+        }
+
+        for (int i = 0; i < 15; i++) {
+            if (!PUV[i]) {
+                FUV[i] = true;
+            } else {
+                // PUV[i] remains true only if all elements in the row are true
+                FUV[i] = true;
+                for (int j = 0; j < 15; j++) {
+                    if (!PUM[i][j]) {
+                        FUV[i] = false;
+                        break;
+                    }
+                }
+            }
+        }
+
         launch = true;
+        for (int i = 0; i < 15; i++) {
+            if (!FUV[i]) {
+                launch = false;
+                break;
+            }
+        }
+        
+        if (launch) {
+            System.out.println("YES");
+        } else {
+            System.out.println("NO");
+        }
     }
 
     public static void main(String[] args) {

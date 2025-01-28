@@ -16,6 +16,151 @@ public class Tests {
     }
 
     @Test
+    public void decideIsTrueInTrivialCase() {
+        // Some random parameters, these don't matter
+        decide.PARAMETERS.LENGTH1 = 2.0;
+        decide.PARAMETERS.RADIUS1 = 4.0;
+        decide.PARAMETERS.EPSILON = Math.PI/4;
+        decide.PARAMETERS.AREA1 = 4.0;
+        decide.PARAMETERS.Q_PTS = 4;
+        decide.PARAMETERS.QUADS = 2;
+        decide.PARAMETERS.DIST = 1.5;
+        decide.PARAMETERS.N_PTS = 3;
+        decide.PARAMETERS.K_PTS = 2;
+        decide.PARAMETERS.A_PTS = 1;
+        decide.PARAMETERS.B_PTS = 1;
+        decide.PARAMETERS.C_PTS = 1;
+        decide.PARAMETERS.D_PTS = 1;
+        decide.PARAMETERS.E_PTS = 1;
+        decide.PARAMETERS.F_PTS = 1;
+        decide.PARAMETERS.G_PTS = 1;
+        decide.PARAMETERS.LENGTH2 = 5.0;
+        decide.PARAMETERS.RADIUS2 = 3.0;
+        decide.PARAMETERS.AREA2 = 2.0;
+
+        decide.NUMPOINTS = 6;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(0,0),
+            new Point2D.Double(2,2),
+            new Point2D.Double(2,3),
+            new Point2D.Double(3,4),
+            new Point2D.Double(20,15),
+            new Point2D.Double(22,18)
+        };
+        
+        for(int i = 0; i < 15; i++){
+            decide.PUV[i] = false;
+        }
+
+        for(int i = 0; i < 15; i++){
+            for(int j = 0; j < 15; j++){
+                decide.LCM[i][j] = Decide.CONNECTORS.NOTUSED;
+            }
+        }
+        
+        decide.decide();
+        assertTrue(decide.launch);
+    }
+
+    @Test
+    public void decideIsTrueIfLic8True() {
+        // Some random parameters, these don't matter
+        decide.PARAMETERS.LENGTH1 = 2.0;
+        decide.PARAMETERS.EPSILON = Math.PI / 4;
+        decide.PARAMETERS.AREA1 = 4.0;
+        decide.PARAMETERS.Q_PTS = 4;
+        decide.PARAMETERS.QUADS = 2;
+        decide.PARAMETERS.DIST = 1.5;
+        decide.PARAMETERS.N_PTS = 3;
+        decide.PARAMETERS.K_PTS = 2;
+        decide.PARAMETERS.C_PTS = 1;
+        decide.PARAMETERS.D_PTS = 1;
+        decide.PARAMETERS.E_PTS = 1;
+        decide.PARAMETERS.F_PTS = 1;
+        decide.PARAMETERS.G_PTS = 1;
+        decide.PARAMETERS.LENGTH2 = 5.0;
+        decide.PARAMETERS.RADIUS2 = 3.0;
+        decide.PARAMETERS.AREA2 = 2.0;
+
+        // Parameters for LIC8 true test
+        decide.NUMPOINTS = 5;
+        decide.PARAMETERS.A_PTS = 1;
+        decide.PARAMETERS.B_PTS = 1;
+        decide.PARAMETERS.RADIUS1 = 1;
+        decide.COORDINATES = new Point2D[] {
+                new Point2D.Double(0, 0),
+                new Point2D.Double(-1, -1),
+                new Point2D.Double(0, 2),
+                new Point2D.Double(-1, -1),
+                new Point2D.Double(0, 4)
+        };
+
+        assertTrue(decide.lic8());
+
+        for (int i = 0; i < 15; i++) {
+            decide.PUV[i] = false;
+        }
+        decide.PUV[8] = true; // lic8 should count
+
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                decide.LCM[i][j] = Decide.CONNECTORS.ORR;
+            }
+        }
+
+        decide.decide();
+        assertTrue(decide.launch);
+    }
+
+    @Test
+    public void decideIsFalseIfLic8False() {
+        // Some random parameters, these don't matter
+        decide.PARAMETERS.LENGTH1 = 2.0;
+        decide.PARAMETERS.EPSILON = Math.PI / 4;
+        decide.PARAMETERS.AREA1 = 4.0;
+        decide.PARAMETERS.Q_PTS = 4;
+        decide.PARAMETERS.QUADS = 2;
+        decide.PARAMETERS.DIST = 1.5;
+        decide.PARAMETERS.N_PTS = 3;
+        decide.PARAMETERS.K_PTS = 2;
+        decide.PARAMETERS.C_PTS = 1;
+        decide.PARAMETERS.D_PTS = 1;
+        decide.PARAMETERS.E_PTS = 1;
+        decide.PARAMETERS.F_PTS = 1;
+        decide.PARAMETERS.G_PTS = 1;
+        decide.PARAMETERS.LENGTH2 = 5.0;
+        decide.PARAMETERS.RADIUS2 = 3.0;
+        decide.PARAMETERS.AREA2 = 2.0;
+
+        // Parameters for LIC8 false test
+        decide.NUMPOINTS = 5;
+        decide.PARAMETERS.A_PTS = 1;
+        decide.PARAMETERS.B_PTS = 1;
+        decide.PARAMETERS.RADIUS1 = 3;
+        decide.COORDINATES = new Point2D[] {
+                new Point2D.Double(0, 0),
+                new Point2D.Double(-1, -1),
+                new Point2D.Double(0, 2),
+                new Point2D.Double(-1, -1),
+                new Point2D.Double(0, 4)
+        };
+
+        for (int i = 0; i < 15; i++) {
+            decide.PUV[i] = false;
+        }
+        decide.PUV[8] = true; // lic8 should count
+
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                decide.LCM[i][j] = Decide.CONNECTORS.ORR;
+            }
+        }
+
+        decide.decide();
+        assertFalse(decide.launch);
+    }
+
+    @Test
     public void lic0IsTrueInNormalCase()
     {
         decide.PARAMETERS.LENGTH1 = 2;
