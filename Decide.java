@@ -127,6 +127,70 @@ public class Decide {
     }
 
     /*
+    * There exists at least one set of three consecutive data points which form an angle such that:
+    * angle < (PI − EPSILON) or angle > (PI + EPSILON)
+    * The second of the three consecutive points is always the vertex of the angle. If either the first
+    * point or the last point (or both) coincides with the vertex, the angle is undefined and the LIC
+    * is not satisfied by those three points.
+    * (0 ≤ EPSILON < PI)
+    * 
+    * @ author Robin Gunnarsson
+    * @ reference: https://shorturl.at/rkxFb (Used for calculating the angle between three points in 2D)
+    * @ return true if condition is met, otherwise false
+    */
+
+    public boolean lic2(){
+        double pi = Math.PI;
+
+        if(NUMPOINTS != COORDINATES.length){
+            throw new IllegalArgumentException("NUMPOINTS does not match the amount of coordinates in COORDINATES");
+        }
+        if(PARAMETERS.EPSILON < 0){
+            throw new IllegalArgumentException("EPSILON is less than 0");
+        }
+        if(PARAMETERS.EPSILON >= pi){
+            throw new IllegalArgumentException("EPSILON is greater than, or equal to, 0");
+        }
+        for(int i = 2; i < COORDINATES.length; i++){
+            Point2D[] anglePoints = new Point2D[3];
+            
+
+            anglePoints[0] = COORDINATES[i-2];
+            anglePoints[1] = COORDINATES[i-1];
+            anglePoints[2] = COORDINATES[i];
+
+            if (anglePoints[1] == anglePoints[0] || anglePoints[1] == anglePoints[2]) {
+                //Angle is undefined since one or both of the ponits coincides with the vertex  
+            }else{
+                double angle;
+                double x0, x1, x2, y0, y1, y2;
+                double magnitudeA, magnitudeB;
+
+                x0 = anglePoints[0].getX();
+                x1 = anglePoints[1].getX();
+                x2 = anglePoints[2].getX();
+
+                y0 = anglePoints[0].getY();
+                y1 = anglePoints[1].getY();
+                y2 = anglePoints[2].getY();
+                
+                magnitudeA = anglePoints[1].distance(anglePoints[0]);
+                magnitudeB = anglePoints[1].distance(anglePoints[2]);
+
+                angle = Math.acos(((x0 - x1) * (x2 - x1) + (y0 - y1) * (y2 - y1)) / (magnitudeA * magnitudeB));
+                
+                if(angle < (pi - PARAMETERS.EPSILON) || angle > (pi + PARAMETERS.EPSILON)){
+                    return true;
+                }
+
+            }
+
+         
+        }
+        return false;
+    }
+
+    /*
     * There exists at least one set of Q_PTS consecutive data points that lie in more than QUADS
     * quadrants. Where there is ambiguity as to which quadrant contains a given point, priority
     * of decision will be by quadrant number, i.e., I, II, III, IV. For example, the data point (0,0)
