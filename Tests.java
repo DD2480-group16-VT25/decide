@@ -72,6 +72,37 @@ public class Tests {
     }
 
     @Test
+    public void lic2IsTrueInNormalCase()
+    {
+        decide.PARAMETERS.EPSILON = Math.PI/4;
+        decide.NUMPOINTS = 6;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(20,20),
+            new Point2D.Double(19,19),
+            new Point2D.Double(18,19),
+            new Point2D.Double(17,17),
+            new Point2D.Double(17,15),
+            new Point2D.Double(16,10)
+        };
+        assertTrue(decide.lic2());
+    }
+
+    @Test
+    public void lic2IsFalseInNormalCase(){
+        decide.PARAMETERS.EPSILON = Math.PI/4;
+        decide.NUMPOINTS = 6;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(20,20),
+            new Point2D.Double(20,20),
+            new Point2D.Double(19,19),
+            new Point2D.Double(18,18),
+            new Point2D.Double(17,17),
+            new Point2D.Double(16,16)
+        };
+        assertFalse(decide.lic2());
+    }
+
+    @Test
     public void lic4IsTrueInNormalCase() {
         decide.PARAMETERS.Q_PTS = 4;
         decide.PARAMETERS.QUADS = 2;
