@@ -551,4 +551,72 @@ public class Tests {
 
         assertFalse(decide.lic12());
     }
+
+    @Test
+    public void lic13IsTrueInNormalCase(){
+        decide.PARAMETERS.RADIUS1 = 1;
+        decide.PARAMETERS.RADIUS2 = 10;
+        decide.PARAMETERS.A_PTS = 1;
+        decide.PARAMETERS.B_PTS = 1;
+        decide.NUMPOINTS = 5;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(0,0),
+            new Point2D.Double(1,0),
+            new Point2D.Double(0,1),
+            new Point2D.Double(1,1),
+            new Point2D.Double(5,0)
+        };
+        assertTrue(decide.lic13());
+    }
+
+    @Test 
+    public void lic13IsFalseInNormalCase(){
+        decide.PARAMETERS.RADIUS1 = 10;
+        decide.PARAMETERS.RADIUS2 = 1;
+        decide.PARAMETERS.A_PTS = 1;
+        decide.PARAMETERS.B_PTS = 1;
+        decide.NUMPOINTS = 5;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(0,0),
+            new Point2D.Double(1,0),
+            new Point2D.Double(0,1),
+            new Point2D.Double(1,1),
+            new Point2D.Double(5,0)
+        };
+        assertFalse(decide.lic13());
+    }
+
+    @Test
+    public void lic14IsTrueinNormalCase(){
+        decide.PARAMETERS.AREA1 = 1;
+        decide.PARAMETERS.AREA2 = 10;
+        decide.PARAMETERS.E_PTS = 1;
+        decide.PARAMETERS.F_PTS = 1;
+        decide.NUMPOINTS = 5;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(0,0),
+            new Point2D.Double(1,0),
+            new Point2D.Double(2,0),
+            new Point2D.Double(1,1),
+            new Point2D.Double(2,2)
+        };
+        assertTrue(decide.lic14());
+    }
+
+    @Test
+    public void lic14IsFalseInNormalCase(){
+        decide.PARAMETERS.AREA1 = 10;
+        decide.PARAMETERS.AREA2 = 1;
+        decide.PARAMETERS.E_PTS = 1;
+        decide.PARAMETERS.F_PTS = 1;
+        decide.NUMPOINTS = 5;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(0,0),
+            new Point2D.Double(1,0),
+            new Point2D.Double(0,1),
+            new Point2D.Double(1,1),
+            new Point2D.Double(1,1)
+        };
+        assertFalse(decide.lic14());
+    }
 }
