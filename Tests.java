@@ -53,12 +53,12 @@ public class Tests {
             new Point2D.Double(20,15),
             new Point2D.Double(22,18)
         };
-        assertTrue(decide.lic0());
+        assertTrue(decide.lic1());
     }
 
     @Test
     public void lic1IsFalseInNormalCase(){
-        decide.PARAMETERS.LENGTH1 = 10;
+        decide.PARAMETERS.RADIUS1 = 10;
         decide.NUMPOINTS = 6;
         decide.COORDINATES = new Point2D[]{
             new Point2D.Double(0,0),
@@ -68,7 +68,7 @@ public class Tests {
             new Point2D.Double(4,4),
             new Point2D.Double(4,5)
         };
-        assertFalse(decide.lic0());
+        assertFalse(decide.lic1());
     }
 
     @Test
