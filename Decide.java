@@ -709,7 +709,8 @@ public class Decide {
         CMV[10] = lic10();
         CMV[11] = lic11();
         CMV[12] = lic12();
-        // TODO: Add remaining LICs
+        CMV[13] = lic13();
+        CMV[14] = lic14();
 
         // Calculate PUM
         for (int i = 0; i < 15; i++) {
