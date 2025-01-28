@@ -61,6 +61,10 @@ public class Decide {
     ///////////////////////////////////////
 
     /*
+     * 
+     */
+
+    /*
      * There exists atleast one set of two consecutive data points
      * that are greater distance than the length LENGTH1 apart
      * @author Marcus Odin
@@ -609,6 +613,38 @@ public class Decide {
                     if(COORDINATES[j].distance(COORDINATES[j + PARAMETERS.K_PTS + 1]) < PARAMETERS.LENGTH2){
                         return true;
                     }
+                }
+            }
+        }
+        return false;
+    }
+
+    /*
+     * There exists at least one set of three data points, seperated by exactly A_PTS
+     * and B_PTS consecutive intervening points, respectively, that cannot be contained
+     * within or on  a circle of radius RADIUS1. In addition there exists at least one
+     * set of three data points (which can be the same or different from the three data
+     * points just mentioned) seperated by exactly A_PTS and B_PTS consecutive intervening
+     * points, that can be contained in or on a circle of radius RADIUS2. Both parts must
+     * be true for the LIC to be true. The condition is not met when NUMPOINTS < 5.
+     * @author Marcus Odin
+     * @return
+     */
+    public boolean lic13(){
+        if(PARAMETERS.RADIUS1 < 0){
+            throw new IllegalArgumentException("RADIUS1 is less than 0");
+        }
+        if(PARAMETERS.RADIUS2 < 0){
+            throw new IllegalArgumentException("RADIUS2 is less than 0");
+        }
+        if(lic8()){
+            Point2D middle = new Point2D.Double((COORDINATES[0].getX() + COORDINATES[1].getX() + COORDINATES[2].getX())/3,
+                (COORDINATES[0].getY() + COORDINATES[1].getY() + COORDINATES[2].getY())/3);
+            for(int i = 0; i < COORDINATES.length - PARAMETERS.A_PTS - PARAMETERS.B_PTS -2; i++)
+            {
+                if(COORDINATES[i].distance(middle) <= PARAMETERS.RADIUS2 && COORDINATES[i + PARAMETERS.A_PTS + 1].distance(middle) <= PARAMETERS.RADIUS2 && COORDINATES[i + PARAMETERS.A_PTS + PARAMETERS.B_PTS + 2].distance(middle) <= PARAMETERS.RADIUS2)
+                {
+                    return true;
                 }
             }
         }
