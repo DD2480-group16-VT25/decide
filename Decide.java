@@ -107,10 +107,9 @@ public class Decide {
             circlePoints[1] = COORDINATES[i-1];
             circlePoints[2] = COORDINATES[i];
 
-            for(int j = 0; j < circlePoints.length; j++){
-                x = COORDINATES[i + j].getX();
-                y = COORDINATES[i + j].getY();
-
+            for (Point2D circlePoint : circlePoints) {
+                x = circlePoint.getX();
+                y = circlePoint.getY();
                 sum_x = sum_x + x;
                 sum_y = sum_y + y; 
             }
@@ -118,8 +117,8 @@ public class Decide {
             //Calculates ther center of the three coordinates that is used to determine if any coordinate lies outside the cicle
             Point2D centerPoint = new Point2D.Double(sum_x / circlePoints.length, sum_y / circlePoints.length);
 
-            for(int k = 0; k < circlePoints.length; k++){
-                if(circlePoints[k].distance(centerPoint) > PARAMETERS.RADIUS1){
+            for (Point2D circlePoint : circlePoints) {
+                if (circlePoint.distance(centerPoint) > PARAMETERS.RADIUS1) {
                     return true;
                 }
             }
