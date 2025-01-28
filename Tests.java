@@ -159,6 +159,62 @@ public class Tests {
         decide.decide();
         assertFalse(decide.launch);
     }
+    
+    @Test
+    public void decideLaunchTrue() {
+        decide.NUMPOINTS = 15;
+        decide.PARAMETERS.LENGTH1 = 5.0;
+        decide.PARAMETERS.RADIUS1 = 3.0;
+        decide.PARAMETERS.EPSILON = Math.PI / 4;
+        decide.PARAMETERS.AREA1 = 10.0;
+        decide.PARAMETERS.Q_PTS = 5;
+        decide.PARAMETERS.QUADS = 2;
+        decide.PARAMETERS.DIST = 0.5;
+        decide.PARAMETERS.N_PTS = 4;
+        decide.PARAMETERS.K_PTS = 2;
+        decide.PARAMETERS.A_PTS = 3;
+        decide.PARAMETERS.B_PTS = 3;
+        decide.PARAMETERS.C_PTS = 3;
+        decide.PARAMETERS.D_PTS = 3;
+        decide.PARAMETERS.E_PTS = 3;
+        decide.PARAMETERS.F_PTS = 3;
+        decide.PARAMETERS.G_PTS = 3;
+        decide.PARAMETERS.LENGTH2 = 6.0;
+        decide.PARAMETERS.RADIUS2 = 4.0;
+        decide.PARAMETERS.AREA2 = 8.0;
+
+        decide.COORDINATES = new Point2D[] {
+            new Point2D.Double(1, 1), new Point2D.Double(2, 2), new Point2D.Double(3, 3),
+            new Point2D.Double(4, 4), new Point2D.Double(5, 5), new Point2D.Double(6, 6),
+            new Point2D.Double(6, 7), new Point2D.Double(7, 8), new Point2D.Double(8, 10),
+            new Point2D.Double(11, 10), new Point2D.Double(11, 12), new Point2D.Double(12, 11),
+            new Point2D.Double(13, 10), new Point2D.Double(13, 14), new Point2D.Double(15, 15)
+        };
+
+        decide.CMV = new boolean[] {
+            true, true, true, true, true, true, true, true, true, true,
+            true, true, true, true, true
+        };
+
+        decide.LCM = new Decide.CONNECTORS[15][15];
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                if (i == j) {
+                    decide.LCM[i][j] = Decide.CONNECTORS.NOTUSED;
+                } else {
+                    decide.LCM[i][j] = Decide.CONNECTORS.ORR;
+                }
+            }
+        }
+
+        decide.PUV = new boolean[] {
+            false, true, true, false, false, false, true, true, false, true,
+            true, false, true, false, true
+        };
+
+        decide.decide();
+        assertTrue(decide.launch);
+    }
 
     @Test
     public void lic0IsTrueInNormalCase()
