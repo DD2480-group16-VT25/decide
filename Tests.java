@@ -97,6 +97,36 @@ public class Tests {
     }
 
     @Test
+    public void lic6IsTrueInNormalCase() {
+        decide.NUMPOINTS = 5;
+        decide.PARAMETERS.N_PTS = 3;
+        decide.PARAMETERS.DIST = 1.5;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(1, 1),
+            new Point2D.Double(3, 5),
+            new Point2D.Double(6, 4),
+            new Point2D.Double(7, 6),
+            new Point2D.Double(8, 8)
+        };
+        assertTrue(decide.lic6());
+    }
+
+    @Test
+    public void lic6IsFalseInNormalCase() {
+        decide.NUMPOINTS = 5;
+        decide.PARAMETERS.N_PTS = 3;
+        decide.PARAMETERS.DIST = 1.5;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(1, 1),
+            new Point2D.Double(3, 2),
+            new Point2D.Double(5, 3),
+            new Point2D.Double(7, 4),
+            new Point2D.Double(9, 5)
+        };
+        assertFalse(decide.lic6());
+    }    
+
+    @Test
     public void lic8IsTrueInNormalCase() {
         decide.NUMPOINTS = 5;
         decide.PARAMETERS.A_PTS = 1;

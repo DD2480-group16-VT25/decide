@@ -148,6 +148,65 @@ public class Decide {
 
         return false;
     }
+
+    /*
+     * There exists at least one set of N_PTS consecutive data points such that at least one of the 
+     * points lies a distance greater than DIST from the line joining the first and last of these N_PTS 
+     * points. If the first and last points of these N_PTS are identical, then the calculated distance
+     * to compare with DIST will be the distance from the coincident point to all other points of
+     * the N_PTS consecutive points. The condition is not met when NUMPOINTS < 3.
+     * (3 ≤ N_PTS ≤ NUMPOINTS), (0 ≤ DIST)
+     * 
+     * @author Ellen Sigurðardóttir
+     * @return true if the condition is met, otherwise false
+     */
+
+    public boolean lic6() {
+        if (NUMPOINTS != COORDINATES.length) {
+            throw new IllegalArgumentException("NUMPOINTS does not match the amount of coordinates in COORDINATES");
+        }
+        if (NUMPOINTS < 3) {
+            throw new IllegalArgumentException("Number of NUMPOINTS must be greater than 2");
+        }
+        if (PARAMETERS.N_PTS < 3 || PARAMETERS.N_PTS > NUMPOINTS) {
+            throw new IllegalArgumentException("N_PTS must be in the range 3 ≤ N_PTS ≤ NUMPOINTS");
+        }
+        if (PARAMETERS.DIST < 0) {
+            throw new IllegalArgumentException("DIST must be equal or greater than 0");
+        }
+
+        for (int i = 0; i <= NUMPOINTS - PARAMETERS.N_PTS; i++) {
+            Point2D first = COORDINATES[i];
+            Point2D last = COORDINATES[i + PARAMETERS.N_PTS - 1];
+
+            // first and last points are identical
+            if (first.equals(last)) {
+                for (int j = i + 1; j < i + PARAMETERS.N_PTS - 1; i++) {
+                    double distance = first.distance(COORDINATES[j]);
+                    if (distance > PARAMETERS.DIST) return true;
+                }
+            } else {
+                // line between first and last points
+                double x1 = first.getX();
+                double y1 = first.getY();
+                double x2 = last.getX();
+                double y2 = last.getY();
+                double a = y2 - y1;
+                double b = -(x2 - x1);
+                double c = x2 * y1 - y2 * x1;
+
+                for (int j = i + 1; j < i + PARAMETERS.N_PTS; j++) {
+                    double x = COORDINATES[j].getX();
+                    double y = COORDINATES[j].getY();
+                    double distance = Math.abs(a * x + b * y + c) / Math.sqrt(a * a + b * b);
+
+                    if (distance > PARAMETERS.DIST) return true;
+                }
+            }
+        }
+
+        return false;
+    }
   
     /*
      * There exists at least one set of three data points separated by exactly A_PTS
