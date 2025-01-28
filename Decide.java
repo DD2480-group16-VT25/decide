@@ -362,6 +362,35 @@ public class Decide {
 
         return false;
     }
+
+    /*
+     * There exists at least one set of two data points separated by exactly K_PTS consecutive 
+     * intervening points that are a distance greater than the length, LENGTH1, apart. The condition 
+     * is not met when NUMPOINTS < 3. 
+     * 1 ≤ K_PTS ≤ (NUMPOINTS − 2)
+     */
+
+    public boolean lic7() {
+        if (NUMPOINTS != COORDINATES.length) {
+            throw new IllegalArgumentException("NUMPOINTS does not match the amount of coordinates in COORDINATES");
+        }
+        if (NUMPOINTS < 3) {
+            throw new IllegalArgumentException("Number of NUMPOINTS can not be less than 3");
+        }
+        if (PARAMETERS.K_PTS < 2 || PARAMETERS.K_PTS > (NUMPOINTS - 2)) {
+            throw new IllegalArgumentException("K_PTS has to be in the rage 1 ≤ K_PTS ≤ (NUMPOINTS − 2)");
+        }
+        
+        for (int i = 0; i < NUMPOINTS - PARAMETERS.K_PTS - 1; i++) {
+            int j = i + PARAMETERS.K_PTS + 1;
+            
+            double distance = COORDINATES[i].distance(COORDINATES[j]);
+
+            if (distance > PARAMETERS.LENGTH1) return true;
+        }
+
+        return false;
+    }
   
     /*
      * There exists at least one set of three data points separated by exactly A_PTS

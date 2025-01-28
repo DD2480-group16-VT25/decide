@@ -217,7 +217,37 @@ public class Tests {
             new Point2D.Double(9, 5)
         };
         assertFalse(decide.lic6());
-    }    
+    }
+
+    @Test
+    public void lic7IsTrueInNormalCase() {
+        decide.NUMPOINTS = 5;
+        decide.PARAMETERS.K_PTS = 2;
+        decide.PARAMETERS.LENGTH1 = 4.0;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(0, 0),
+            new Point2D.Double(1, 1),  
+            new Point2D.Double(2, 2),
+            new Point2D.Double(5, 5),
+            new Point2D.Double(6, 6)
+        };
+        assertTrue(decide.lic7());
+    }
+
+    @Test
+    public void lic7IsFalseInNormalCase() {
+        decide.NUMPOINTS = 5;
+        decide.PARAMETERS.K_PTS = 2;
+        decide.PARAMETERS.LENGTH1 = 8.0;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(0, 0),
+            new Point2D.Double(1, 1),  
+            new Point2D.Double(2, 2),
+            new Point2D.Double(5, 5),
+            new Point2D.Double(6, 6)
+        };
+        assertFalse(decide.lic7());
+    }
 
     @Test
     public void lic8IsTrueInNormalCase() {
