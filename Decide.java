@@ -578,6 +578,43 @@ public class Decide {
         return false;
     }
 
+    /*
+     * There exists atleast one set of two data points, seperated by exactly K_PTS
+     * consecutive intervening points, which are a distance greater than the length,
+     * LENGTH1, apart. In addition, there exists at least one set of two data points
+     * (which can be the same or different from the two data points just mentioned),
+     * seperated by exactly K_PTS consecutive intervening points, that are a distance
+     * les than the length, LENGTH2, apart. Both parts must be true for the LIC to be
+     * true. The condition is not met when NUMPOINT < 3.
+     * @author Marcus Odin
+     * @return
+     * 
+     */
+    public boolean lic12(){
+        if (PARAMETERS.LENGTH1 < 0) {
+            throw new IllegalArgumentException("LENGTH1 is less than 0");
+        }
+
+        if (PARAMETERS.LENGTH2 < 0) {
+            throw new IllegalArgumentException("LENGTH2 i s less than 0");
+        }
+
+        if(NUMPOINTS < 3 ){
+            return false;
+        }
+
+        for(int i = 0; i < COORDINATES.length - PARAMETERS.K_PTS - 1; i++) {
+            if(COORDINATES[i].distance(COORDINATES[i + PARAMETERS.K_PTS + 1]) > PARAMETERS.LENGTH1){
+                for(int j = 0; j < COORDINATES.length - PARAMETERS.K_PTS - 1; j++){
+                    if(COORDINATES[j].distance(COORDINATES[j + PARAMETERS.K_PTS + 1]) < PARAMETERS.LENGTH2){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     public void decide(){
         launch = true;
     }
