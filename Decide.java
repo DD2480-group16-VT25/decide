@@ -191,6 +191,53 @@ public class Decide {
     }
 
     /*
+    * There exists at least one set of three consecutive data points that are the vertices of a triangle
+    * with area greater than AREA1.
+    * (0 ≤ AREA1)
+    *
+    * @author Robin Gunnarsson
+    * @return true if condition is met, otherwise false
+    */
+
+    public boolean lic3(){
+        if(NUMPOINTS != COORDINATES.length){
+            throw new IllegalArgumentException("NUMPOINTS does not match the amount of coordinates in COORDINATES");
+        }
+        if(PARAMETERS.AREA1 < 0){
+            throw new IllegalArgumentException("AREA1 is less than 0");
+        }
+        for(int i = 2; i < COORDINATES.length; i++){
+            Point2D[] trianglePoints = new Point2D[3];
+            
+            trianglePoints[0] = COORDINATES[i-2];
+            trianglePoints[1] = COORDINATES[i-1];
+            trianglePoints[2] = COORDINATES[i];
+
+            if (trianglePoints[1] == trianglePoints[0] || trianglePoints[1] == trianglePoints[2]) {
+                //area is zero since one or both of the ponits coincides with the vertex of the triangle
+            } else{
+                Point2D centerBase;
+                double area, base, hight, x_centerBase, y_centerBase;
+
+                base = trianglePoints[2].distance(trianglePoints[0]);
+
+                x_centerBase = (trianglePoints[0].getX() + trianglePoints[2].getX()) / 2;
+                y_centerBase = (trianglePoints[0].getY() + trianglePoints[2].getY()) / 2;
+                centerBase = new Point2D.Double(x_centerBase, y_centerBase); 
+                
+                hight = centerBase.distance(trianglePoints[1]);
+
+                area = (base * hight) / 2;
+
+                if(area > PARAMETERS.AREA1){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /*
     * There exists at least one set of Q_PTS consecutive data points that lie in more than QUADS
     * quadrants. Where there is ambiguity as to which quadrant contains a given point, priority
     * of decision will be by quadrant number, i.e., I, II, III, IV. For example, the data point (0,0)
