@@ -95,8 +95,8 @@ public class Decide {
         if(NUMPOINTS != COORDINATES.length){
             throw new IllegalArgumentException("NUMPOINTS does not match the amount of coordinates in COORDINATES");
         }
-        if(PARAMETERS.RADIUS1 <= 0){
-            throw new IllegalArgumentException("RADIUS1 is less than, or equal to, 0");
+        if(PARAMETERS.RADIUS1 < 0){
+            throw new IllegalArgumentException("RADIUS1 is less than 0");
         }
 
         for(int i = 2; i < COORDINATES.length; i++){
