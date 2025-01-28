@@ -41,6 +41,99 @@ public class Tests {
     }
 
     @Test
+    public void lic1IsTrueInNormalCase()
+    {
+        decide.PARAMETERS.RADIUS1 = 4;
+        decide.NUMPOINTS = 6;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(0,0),
+            new Point2D.Double(2,2),
+            new Point2D.Double(2,3),
+            new Point2D.Double(3,4),
+            new Point2D.Double(20,15),
+            new Point2D.Double(22,18)
+        };
+        assertTrue(decide.lic1());
+    }
+
+    @Test
+    public void lic1IsFalseInNormalCase(){
+        decide.PARAMETERS.RADIUS1 = 10;
+        decide.NUMPOINTS = 6;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(0,0),
+            new Point2D.Double(1,1),
+            new Point2D.Double(2,2),
+            new Point2D.Double(3,3),
+            new Point2D.Double(4,4),
+            new Point2D.Double(4,5)
+        };
+        assertFalse(decide.lic1());
+    }
+
+    @Test
+    public void lic2IsTrueInNormalCase()
+    {
+        decide.PARAMETERS.EPSILON = Math.PI/4;
+        decide.NUMPOINTS = 6;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(20,20),
+            new Point2D.Double(19,19),
+            new Point2D.Double(18,19),
+            new Point2D.Double(17,17),
+            new Point2D.Double(17,15),
+            new Point2D.Double(16,10)
+        };
+        assertTrue(decide.lic2());
+    }
+
+    @Test
+    public void lic2IsFalseInNormalCase(){
+        decide.PARAMETERS.EPSILON = Math.PI/4;
+        decide.NUMPOINTS = 6;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(20,20),
+            new Point2D.Double(20,20),
+            new Point2D.Double(19,19),
+            new Point2D.Double(18,18),
+            new Point2D.Double(17,17),
+            new Point2D.Double(16,16)
+        };
+        assertFalse(decide.lic2());
+    }
+
+    @Test
+    public void lic3IsTrueInNormalCase()
+    {
+        decide.PARAMETERS.AREA1 = 4;
+        decide.NUMPOINTS = 6;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(20,20),
+            new Point2D.Double(18,18),
+            new Point2D.Double(10,18),
+            new Point2D.Double(10,10),
+            new Point2D.Double(8,4),
+            new Point2D.Double(2,0)
+        };
+        assertTrue(decide.lic3());
+    }
+
+    @Test
+    public void lic3IsFalseInNormalCase(){
+        decide.PARAMETERS.AREA1 = 4;
+        decide.NUMPOINTS = 6;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(20,20),
+            new Point2D.Double(20,20),
+            new Point2D.Double(19,19),
+            new Point2D.Double(18,18),
+            new Point2D.Double(17,17),
+            new Point2D.Double(16,16)
+        };
+        assertFalse(decide.lic3());
+    }
+
+    @Test
     public void lic4IsTrueInNormalCase() {
         decide.PARAMETERS.Q_PTS = 4;
         decide.PARAMETERS.QUADS = 2;
