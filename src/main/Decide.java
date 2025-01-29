@@ -695,8 +695,7 @@ public class Decide {
         return false;
     }
 
-    public void decide(){
-        // Populate CMV
+    public void populateCMV() {
         CMV[0] = lic0();
         CMV[1] = lic1();
         CMV[2] = lic2();
@@ -712,8 +711,9 @@ public class Decide {
         CMV[12] = lic12();
         CMV[13] = lic13();
         CMV[14] = lic14();
+    }
 
-        // Calculate PUM
+    public void populatePUM() {
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j < 15; j++) {
                 if (LCM[i][j] == CONNECTORS.ANDD) {
@@ -725,7 +725,9 @@ public class Decide {
                 }
             }
         }
+    }
 
+    public void populateFUV() {
         for (int i = 0; i < 15; i++) {
             if (!PUV[i]) {
                 FUV[i] = true;
@@ -740,6 +742,12 @@ public class Decide {
                 }
             }
         }
+    }
+
+    public void decide(){
+        populateCMV();
+        populatePUM();
+        populateFUV();
 
         launch = true;
         for (int i = 0; i < 15; i++) {
