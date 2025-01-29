@@ -1006,6 +1006,24 @@ public class Tests {
         assertFalse(decide.lic13());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void lic14ThrowsExceptionWhenAreaisLessThan0(){
+        decide.NUMPOINTS = 5;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(0,0),
+            new Point2D.Double(1,0),
+            new Point2D.Double(0,1),
+            new Point2D.Double(1,1),
+            new Point2D.Double(2,2)
+        };
+        decide.PARAMETERS.AREA1 = 1;
+        decide.PARAMETERS.AREA2 = -1;
+        decide.PARAMETERS.E_PTS = 1;
+        decide.PARAMETERS.F_PTS = 1;
+
+        decide.lic14();
+    }
+
     @Test
     public void lic14IsTrueinNormalCase(){
         decide.PARAMETERS.AREA1 = 1;
