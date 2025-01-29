@@ -1,3 +1,4 @@
+package src.main;
 import java.awt.geom.Point2D;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,25 +12,25 @@ public class Decide {
 
     // Inputs to the DECIDE() function
     public class PARAMETERS_T {
-        double LENGTH1;
-        double RADIUS1;
-        double EPSILON;
-        double AREA1;
-        int Q_PTS;
-        int QUADS;
-        double DIST;
-        int N_PTS;
-        int K_PTS;
-        int A_PTS;
-        int B_PTS;
-        int C_PTS;
-        int D_PTS;
-        int E_PTS;
-        int F_PTS;
-        int G_PTS;
-        double LENGTH2;
-        double RADIUS2;
-        double AREA2;
+        public double LENGTH1;
+        public double RADIUS1;
+        public double EPSILON;
+        public double AREA1;
+        public int Q_PTS;
+        public int QUADS;
+        public double DIST;
+        public int N_PTS;
+        public int K_PTS;
+        public int A_PTS;
+        public int B_PTS;
+        public int C_PTS;
+        public int D_PTS;
+        public int E_PTS;
+        public int F_PTS;
+        public int G_PTS;
+        public double LENGTH2;
+        public double RADIUS2;
+        public double AREA2;
     }
 
     public PARAMETERS_T PARAMETERS;
@@ -50,7 +51,7 @@ public class Decide {
     boolean[][] PUM = new boolean[15][15];
 
     // Conditions Met Vector (CMV)
-    boolean []CMV = new boolean[15];
+    public boolean []CMV = new boolean[15];
 
     // Final Unlocking Vector (FUV)
     boolean[] FUV = new boolean[15];

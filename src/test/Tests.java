@@ -1,8 +1,10 @@
 import org.junit.Test;
+
+import src.main.Decide;
+
 import org.junit.Before;
 import static org.junit.Assert.*;
 
-import java.awt.Point;
 import java.awt.geom.Point2D;
 
 public class Tests {
