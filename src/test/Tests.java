@@ -216,6 +216,37 @@ public class Tests {
     }
 
     @Test
+    public void populateFUVIsTrueIfPUVIsFalse(){
+        for(int i = 0; i < decide.PUV.length; i++){
+            decide.PUV[i] = false;
+        }
+
+        decide.populateFUV();
+        for(int i = 0; i < decide.FUV.length; i++){
+            assertTrue(decide.FUV[i]);
+        }
+    }
+
+    @Test
+    public void populateFUVIsFalseIfPUVIsTrueAndPUMIsFalse(){
+        for(int i = 0; i < decide.PUV.length; i++){
+            decide.PUV[i] = true;
+        }
+
+        for(int i = 0; i < decide.PUM.length; i++){
+            for(int j = 0; j < decide.PUM[i].length; j++){
+                decide.PUM[i][j] = false;
+            }
+        }
+
+        decide.populateFUV();
+
+        for(int i = 0; i < decide.FUV.length; i++){
+            assertFalse(decide.FUV[i]);
+        }
+    }
+
+    @Test
     public void decideIsTrueInTrivialCase() {
         // Some random parameters, these don't matter
         decide.PARAMETERS.LENGTH1 = 2.0;

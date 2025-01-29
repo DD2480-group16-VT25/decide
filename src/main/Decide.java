@@ -54,7 +54,7 @@ public class Decide {
     public boolean []CMV = new boolean[15];
 
     // Final Unlocking Vector (FUV)
-    boolean[] FUV = new boolean[15];
+    public boolean[] FUV = new boolean[15];
 
     // Decision: Launch or Not Launch
     public boolean launch;
@@ -727,6 +727,9 @@ public class Decide {
         }
     }
 
+    /*
+     * Computes the FUV
+     */
     public void populateFUV() {
         for (int i = 0; i < 15; i++) {
             if (!PUV[i]) {
