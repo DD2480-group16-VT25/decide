@@ -48,7 +48,7 @@ public class Decide {
     public boolean[] PUV = new boolean[15];
 
     // Preliminary Unlocking Matrix (PUM)
-    boolean[][] PUM = new boolean[15][15];
+    public boolean[][] PUM = new boolean[15][15];
 
     // Conditions Met Vector (CMV)
     public boolean []CMV = new boolean[15];

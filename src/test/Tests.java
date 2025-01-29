@@ -110,6 +110,112 @@ public class Tests {
     }
 
     @Test
+    public void populatePUMCorrectly() {
+        decide.CMV = new boolean[] {
+            true, false, true, false, true, false, true, false, true, false,
+            true, false, true, false, true
+        };
+
+        decide.LCM = new Decide.CONNECTORS[15][15];
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                if (i == j) {
+                    decide.LCM[i][j] = Decide.CONNECTORS.NOTUSED;
+                } else if ((i + j) % 3 == 0) {
+                    decide.LCM[i][j] = Decide.CONNECTORS.ANDD;
+                } else {
+                    decide.LCM[i][j] = Decide.CONNECTORS.ORR; 
+                }
+            }
+        }
+
+        decide.populatePUM();
+        boolean[][] testingPUM = {
+            {true, true, true, false, true, true, true, true, true, false, true, true, true, true, true},
+            {true, true, false, false, true, false, true, false, false, false, true, false, true, false, false},
+            {true, false, true, true, true, true, true, false, true, true, true, true, true, false, true},
+            {false, false, true, true, true, false, false, false, true, false, true, false, false, false, true},
+            {true, true, true, true, true, false, true, true, true, true, true, false, true, true, true},
+            {true, false, true, false, false, true, true, false, true, false, false, false, true, false, true},
+            {true, true, true, false, true, true, true, true, true, false, true, true, true, true, true},
+            {true, false, false, false, true, false, true, true, false, false, true, false, true, false, false},
+            {true, false, true, true, true, true, true, false, true, true, true, true, true, false, true},
+            {false, false, true, false, true, false, false, false, true, true, true, false, false, false, true},
+            {true, true, true, true, true, false, true, true, true, true, true, false, true, true, true},
+            {true, false, true, false, false, false, true, false, true, false, false, true, true, false, true},
+            {true, true, true, false, true, true, true, true, true, false, true, true, true, true, true},
+            {true, false, false, false, true, false, true, false, false, false, true, false, true, true, false},
+            {true, false, true, true, true, true, true, false, true, true, true, true, true, false, true}
+        };
+        assertArrayEquals(decide.PUM, testingPUM);
+    }
+
+
+    @Test
+    public void populatePUMCorrectly2() {
+        decide.CMV = new boolean[] {
+            false, false, true, false, true, false, true, false, true, false,
+            true, false, true, false, true
+        };
+
+        decide.LCM = new Decide.CONNECTORS[15][15];
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                if (i == j) {
+                    decide.LCM[i][j] = Decide.CONNECTORS.NOTUSED;
+                } else if ((i + j) % 3 == 0) {
+                    decide.LCM[i][j] = Decide.CONNECTORS.ANDD;
+                } else {
+                    decide.LCM[i][j] = Decide.CONNECTORS.ORR; 
+                }
+            }
+        }
+
+        decide.populatePUM();
+        boolean[][] testingPUM = {
+            {true, false, true, false, true, false, false, false, true, false, true, false, false, false, true},
+            {false, true, false, false, true, false, true, false, false, false, true, false, true, false, false},
+            {true, false, true, true, true, true, true, false, true, true, true, true, true, false, true},
+            {false, false, true, true, true, false, false, false, true, false, true, false, false, false, true},
+            {true, true, true, true, true, false, true, true, true, true, true, false, true, true, true},
+            {false, false, true, false, false, true, true, false, true, false, false, false, true, false, true},
+            {false, true, true, false, true, true, true, true, true, false, true, true, true, true, true},
+            {false, false, false, false, true, false, true, true, false, false, true, false, true, false, false},
+            {true, false, true, true, true, true, true, false, true, true, true, true, true, false, true},
+            {false, false, true, false, true, false, false, false, true, true, true, false, false, false, true},
+            {true, true, true, true, true, false, true, true, true, true, true, false, true, true, true},
+            {false, false, true, false, false, false, true, false, true, false, false, true, true, false, true},
+            {false, true, true, false, true, true, true, true, true, false, true, true, true, true, true},
+            {false, false, false, false, true, false, true, false, false, false, true, false, true, true, false},
+            {true, false, true, true, true, true, true, false, true, true, true, true, true, false, true}
+        };
+        assertArrayEquals(decide.PUM, testingPUM);
+    }
+
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    public void populatePUMInvalid() {
+        decide.CMV = new boolean[] {
+            true, false, true, false, true, false, true, false, true, false,
+            true, false, true
+        };
+
+        decide.LCM = new Decide.CONNECTORS[15][15];
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                if (i == j) {
+                    decide.LCM[i][j] = Decide.CONNECTORS.NOTUSED;
+                } else if ((i + j) % 3 == 0) {
+                    decide.LCM[i][j] = Decide.CONNECTORS.ANDD;
+                } else {
+                    decide.LCM[i][j] = Decide.CONNECTORS.ORR; 
+                }
+            }
+        }
+
+        decide.populatePUM();
+    }
+
+    @Test
     public void decideIsTrueInTrivialCase() {
         // Some random parameters, these don't matter
         decide.PARAMETERS.LENGTH1 = 2.0;
