@@ -578,6 +578,23 @@ public class Tests {
         assertFalse(decide.lic8());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void lic8ThrowsIfA_PTSIsZero() {
+        decide.NUMPOINTS = 5;
+        decide.PARAMETERS.A_PTS = 0;
+        decide.PARAMETERS.B_PTS = 1;
+        decide.PARAMETERS.RADIUS1 = 1;
+        decide.COORDINATES = new Point2D[] {
+                new Point2D.Double(0, 0),
+                new Point2D.Double(-1, -1),
+                new Point2D.Double(0, 2),
+                new Point2D.Double(-1, -1),
+                new Point2D.Double(0, 4)
+        };
+
+        decide.lic8();
+    }
+
     @Test
     public void lic9IsTrueInNormalCase() {
         decide.NUMPOINTS = 5;
@@ -610,6 +627,23 @@ public class Tests {
         }; // angle = 1.57...
 
         assertFalse(decide.lic9());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void lic9ThrowsIfC_PTSIsZero() {
+        decide.NUMPOINTS = 5;
+        decide.PARAMETERS.C_PTS = 0;
+        decide.PARAMETERS.D_PTS = 1;
+        decide.PARAMETERS.EPSILON = 1;
+        decide.COORDINATES = new Point2D[] {
+                new Point2D.Double(0, 2),
+                new Point2D.Double(-1, -1),
+                new Point2D.Double(2, 0),
+                new Point2D.Double(-1, -1),
+                new Point2D.Double(4, 2)
+        };
+
+        decide.lic9();
     }
 
     @Test
@@ -646,6 +680,23 @@ public class Tests {
         assertFalse(decide.lic10());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void lic10ThrowsIfE_PTSIsZero() {
+        decide.NUMPOINTS = 5;
+        decide.PARAMETERS.E_PTS = 0;
+        decide.PARAMETERS.F_PTS = 1;
+        decide.PARAMETERS.AREA1 = 1.7;
+        decide.COORDINATES = new Point2D[] {
+                new Point2D.Double(0, 2),
+                new Point2D.Double(-1, -1),
+                new Point2D.Double(0, 0),
+                new Point2D.Double(-1, -1),
+                new Point2D.Double(2, 0)
+        };
+
+        decide.lic10();
+    }
+
     @Test
     public void lic11IsTrueInNormalCase() {
         decide.NUMPOINTS = 3;
@@ -670,6 +721,19 @@ public class Tests {
         }; // X[0] < X[2]
 
         assertFalse(decide.lic11());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void lic11ThrowsIfG_PTSIsZero() {
+        decide.NUMPOINTS = 3;
+        decide.PARAMETERS.G_PTS = 0;
+        decide.COORDINATES = new Point2D[] {
+                new Point2D.Double(1, 0),
+                new Point2D.Double(-1, -1),
+                new Point2D.Double(0, 0),
+        };
+
+        decide.lic11();
     }
 
     @Test
