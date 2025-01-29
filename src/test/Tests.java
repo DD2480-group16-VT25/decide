@@ -566,6 +566,22 @@ public class Tests {
         assertFalse(decide.lic4());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void lic4InvalidInput() {
+        decide.PARAMETERS.Q_PTS = 4;
+        decide.PARAMETERS.QUADS = 2;
+        decide.NUMPOINTS = 5;
+        decide.COORDINATES = new Point2D[] {
+            new Point2D.Double(1, 1),
+            new Point2D.Double(-1, 1),
+            new Point2D.Double(-1, -1),
+            new Point2D.Double(2, -2),
+            new Point2D.Double(3, 3),
+            new Point2D.Double(-2, 2)
+        };
+        decide.lic4();
+    }
+
     @Test
     public void lic5IsTrueInNormalCase() {
         decide.NUMPOINTS = 4;
@@ -588,6 +604,17 @@ public class Tests {
             new Point2D.Double(4, 4),
         };
         assertFalse(decide.lic5());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void lic5InvalidInput() {
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(1, 1),
+            new Point2D.Double(3, 2),
+            new Point2D.Double(2, 3),
+            new Point2D.Double(5, 4),
+        };
+        decide.lic5();
     }
 
     @Test
@@ -620,6 +647,21 @@ public class Tests {
         assertFalse(decide.lic6());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void lic6InvalidInput() {
+        decide.NUMPOINTS = 5;
+        decide.PARAMETERS.N_PTS = 2;
+        decide.PARAMETERS.DIST = 0;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(1, 1),
+            new Point2D.Double(3, 5),
+            new Point2D.Double(6, 4),
+            new Point2D.Double(7, 6),
+            new Point2D.Double(8, 8)
+        };
+        decide.lic6();
+    }
+
     @Test
     public void lic7IsTrueInNormalCase() {
         decide.NUMPOINTS = 5;
@@ -648,6 +690,21 @@ public class Tests {
             new Point2D.Double(6, 6)
         };
         assertFalse(decide.lic7());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void lic7InvalidInput() {
+        decide.NUMPOINTS = 5;
+        decide.PARAMETERS.K_PTS = 1;
+        decide.PARAMETERS.LENGTH1 = 4.0;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(0, 0),
+            new Point2D.Double(1, 1),  
+            new Point2D.Double(2, 2),
+            new Point2D.Double(5, 5),
+            new Point2D.Double(6, 6)
+        };
+        decide.lic7();
     }
 
     @Test
