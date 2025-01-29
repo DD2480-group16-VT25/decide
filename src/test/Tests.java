@@ -924,6 +924,21 @@ public class Tests {
         assertTrue(decide.lic12());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void lic12ThrowExceptionWhenLengthLessThan0(){
+        decide.NUMPOINTS = 3;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(0,0),
+            new Point2D.Double(1,1),
+            new Point2D.Double(2,2),
+        };
+        decide.PARAMETERS.LENGTH1 = -1;
+        decide.PARAMETERS.LENGTH2 = 5;
+        decide.PARAMETERS.K_PTS = 1;
+
+        decide.lic12();
+    }
+
     @Test
     public void lic12IsFalseInNormalCase(){
         decide.NUMPOINTS = 3;
