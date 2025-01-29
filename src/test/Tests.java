@@ -416,6 +416,16 @@ public class Tests {
         assertTrue(decide.launch);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void lic0ThrowsExceptionWhenNumPointsDoenstEqualCoordinateAmount(){
+        decide.NUMPOINTS = 3;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(0,0),
+            new Point2D.Double(1,1),
+        };
+        decide.lic0();
+    }
+
     @Test
     public void lic0IsTrueInNormalCase()
     {
