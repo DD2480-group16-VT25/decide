@@ -18,6 +18,98 @@ public class Tests {
     }
 
     @Test
+    public void populateCMVCorrectRandomLICs1() {
+        decide.NUMPOINTS = 15;
+        decide.PARAMETERS.LENGTH1 = 5.0;
+        decide.PARAMETERS.RADIUS1 = 3.0;
+        decide.PARAMETERS.EPSILON = Math.PI / 4;
+        decide.PARAMETERS.AREA1 = 10.0;
+        decide.PARAMETERS.Q_PTS = 5;
+        decide.PARAMETERS.QUADS = 2;
+        decide.PARAMETERS.DIST = 0.5;
+        decide.PARAMETERS.N_PTS = 4;
+        decide.PARAMETERS.K_PTS = 2;
+        decide.PARAMETERS.A_PTS = 3;
+        decide.PARAMETERS.B_PTS = 3;
+        decide.PARAMETERS.C_PTS = 3;
+        decide.PARAMETERS.D_PTS = 3;
+        decide.PARAMETERS.E_PTS = 3;
+        decide.PARAMETERS.F_PTS = 3;
+        decide.PARAMETERS.G_PTS = 3;
+        decide.PARAMETERS.LENGTH2 = 6.0;
+        decide.PARAMETERS.RADIUS2 = 4.0;
+        decide.PARAMETERS.AREA2 = 8.0;
+
+        decide.COORDINATES = new Point2D[] {
+                new Point2D.Double(1, 1), new Point2D.Double(2, 2), new Point2D.Double(3, 3),
+                new Point2D.Double(4, 4), new Point2D.Double(5, 5), new Point2D.Double(6, 6),
+                new Point2D.Double(6, 7), new Point2D.Double(7, 8), new Point2D.Double(8, 10),
+                new Point2D.Double(11, 10), new Point2D.Double(11, 12), new Point2D.Double(12, 11),
+                new Point2D.Double(13, 10), new Point2D.Double(13, 14), new Point2D.Double(15, 15)
+        };
+
+        assertArrayEquals(new boolean[15], decide.CMV);
+        decide.populateCMV();
+        assertArrayEquals(new boolean[] {
+            false, true, true, false, false, false, true, true, true, true,
+            true, false, true, false, true
+        }, decide.CMV);
+    }
+
+    @Test
+    public void populateCMVCorrectRandomLICs2() {
+        /* Here LIC0 should be true instead of false */
+        decide.NUMPOINTS = 15;
+        decide.PARAMETERS.LENGTH1 = 1.0; // 1.0 instead of 5.0
+        decide.PARAMETERS.RADIUS1 = 3.0;
+        decide.PARAMETERS.EPSILON = Math.PI / 4;
+        decide.PARAMETERS.AREA1 = 10.0;
+        decide.PARAMETERS.Q_PTS = 5;
+        decide.PARAMETERS.QUADS = 2;
+        decide.PARAMETERS.DIST = 0.5;
+        decide.PARAMETERS.N_PTS = 4;
+        decide.PARAMETERS.K_PTS = 2;
+        decide.PARAMETERS.A_PTS = 3;
+        decide.PARAMETERS.B_PTS = 3;
+        decide.PARAMETERS.C_PTS = 3;
+        decide.PARAMETERS.D_PTS = 3;
+        decide.PARAMETERS.E_PTS = 3;
+        decide.PARAMETERS.F_PTS = 3;
+        decide.PARAMETERS.G_PTS = 3;
+        decide.PARAMETERS.LENGTH2 = 6.0;
+        decide.PARAMETERS.RADIUS2 = 4.0;
+        decide.PARAMETERS.AREA2 = 8.0;
+
+        decide.COORDINATES = new Point2D[] {
+                new Point2D.Double(1, 1), new Point2D.Double(2, 2), new Point2D.Double(3, 3),
+                new Point2D.Double(4, 4), new Point2D.Double(5, 5), new Point2D.Double(6, 6),
+                new Point2D.Double(6, 7), new Point2D.Double(7, 8), new Point2D.Double(8, 10),
+                new Point2D.Double(11, 10), new Point2D.Double(11, 12), new Point2D.Double(12, 11),
+                new Point2D.Double(13, 10), new Point2D.Double(13, 14), new Point2D.Double(15, 15)
+        };
+
+        assertArrayEquals(new boolean[15], decide.CMV);
+        decide.populateCMV();
+        assertArrayEquals(new boolean[] {
+            true, true, true, false, false, false, true, true, true, true,
+            true, false, true, false, true
+        }, decide.CMV);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void pupulateCMVThrowsIfLIC0Throws() {
+        decide.NUMPOINTS = 0;
+        decide.PARAMETERS.LENGTH1 = 0;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(0,0),
+            new Point2D.Double(1,1),
+            new Point2D.Double(2,2),
+        };
+
+        decide.populateCMV();
+    }
+
+    @Test
     public void decideIsTrueInTrivialCase() {
         // Some random parameters, these don't matter
         decide.PARAMETERS.LENGTH1 = 2.0;
