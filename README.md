@@ -28,6 +28,7 @@ We devided the work by LICs. So each member is reponsible for their implementati
 - Marcus Odin
   - Set up the code skeleton for main program and tests. Also did LIC0 and LIC12-14. Took part in group programming for the decide function and computations of CMV, PUM and FUV. 
 - Robin Gunnarsson
+  - Responsible for LIC1 - LIC3 including unit tests.
 
 ## Testing
 The tests use JUnit 4. So make  sure that is installed somewhere accessable before running tests.
