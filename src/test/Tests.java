@@ -513,6 +513,16 @@ public class Tests {
         assertFalse(decide.lic1());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void lic1ThrowsExceptionWhenNumPointsDoenstEqualCoordinateAmount(){
+        decide.NUMPOINTS = 3;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(0,0),
+            new Point2D.Double(1,1),
+        };
+        decide.lic1();
+    }
+
     @Test
     public void lic2IsTrueInNormalCase()
     {
@@ -544,6 +554,16 @@ public class Tests {
         assertFalse(decide.lic2());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void lic2ThrowsExceptionWhenNumPointsDoenstEqualCoordinateAmount(){
+        decide.NUMPOINTS = 3;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(0,0),
+            new Point2D.Double(1,1),
+        };
+        decide.lic2();
+    }
+
     @Test
     public void lic3IsTrueInNormalCase()
     {
@@ -573,6 +593,16 @@ public class Tests {
             new Point2D.Double(16,16)
         };
         assertFalse(decide.lic3());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void lic3ThrowsExceptionWhenNumPointsDoenstEqualCoordinateAmount(){
+        decide.NUMPOINTS = 3;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(0,0),
+            new Point2D.Double(1,1),
+        };
+        decide.lic3();
     }
 
     @Test
