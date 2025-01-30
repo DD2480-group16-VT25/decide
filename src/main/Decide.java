@@ -767,7 +767,51 @@ public class Decide {
         }
     }
 
+    /* Try a trivial test to get something to print when ran */
     public static void main(String[] args) {
+        Decide decide = new Decide();
+        decide.PARAMETERS = decide.new PARAMETERS_T();
 
+        decide.PARAMETERS.LENGTH1 = 2.0;
+        decide.PARAMETERS.RADIUS1 = 4.0;
+        decide.PARAMETERS.EPSILON = Math.PI / 4;
+        decide.PARAMETERS.AREA1 = 4.0;
+        decide.PARAMETERS.Q_PTS = 4;
+        decide.PARAMETERS.QUADS = 2;
+        decide.PARAMETERS.DIST = 1.5;
+        decide.PARAMETERS.N_PTS = 3;
+        decide.PARAMETERS.K_PTS = 2;
+        decide.PARAMETERS.A_PTS = 1;
+        decide.PARAMETERS.B_PTS = 1;
+        decide.PARAMETERS.C_PTS = 1;
+        decide.PARAMETERS.D_PTS = 1;
+        decide.PARAMETERS.E_PTS = 1;
+        decide.PARAMETERS.F_PTS = 1;
+        decide.PARAMETERS.G_PTS = 1;
+        decide.PARAMETERS.LENGTH2 = 5.0;
+        decide.PARAMETERS.RADIUS2 = 3.0;
+        decide.PARAMETERS.AREA2 = 2.0;
+
+        decide.NUMPOINTS = 6;
+        decide.COORDINATES = new Point2D[] {
+                new Point2D.Double(0, 0),
+                new Point2D.Double(2, 2),
+                new Point2D.Double(2, 3),
+                new Point2D.Double(3, 4),
+                new Point2D.Double(20, 15),
+                new Point2D.Double(22, 18)
+        };
+
+        for (int i = 0; i < 15; i++) {
+            decide.PUV[i] = false;
+        }
+
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 15; j++) {
+                decide.LCM[i][j] = Decide.CONNECTORS.NOTUSED;
+            }
+        }
+
+        decide.decide();
     }
 }

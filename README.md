@@ -2,11 +2,11 @@
 This repository contains the code and documentation for **Assignment 1 - Decide** which is creating an Launch Interceptor Program.
 
 ## How to run it
-Because of the nature of the program running it will not do anything so it is recommended to run the tests to check functionality of the program.
+**Use Java 17 or newer, make sure to use the encoding flag below if facing issues.**
+The `Decide.java` main method rusn a trivial case and returns "YES" when ran. It is recommended to run the tests to check functionality of the program. Instructions for running the `Decide.java` main method is below.
 ```
-$ cd src
-$ javac Decide.java
-$ java Decide
+$ javac -encoding UTF-8 src/main/Decide.java
+$ java src.main.Decide
 ```
 
 ## Group 16
