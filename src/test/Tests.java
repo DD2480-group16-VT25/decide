@@ -523,6 +523,21 @@ public class Tests {
         decide.lic1();
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void lic1ThrowsExceptionWhenRadiusIsInvalid(){
+        decide.PARAMETERS.RADIUS1 = -1;
+        decide.NUMPOINTS = 6;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(0,0),
+            new Point2D.Double(2,2),
+            new Point2D.Double(2,3),
+            new Point2D.Double(3,4),
+            new Point2D.Double(20,15),
+            new Point2D.Double(22,18)
+        };
+        decide.lic1();
+    }
+
     @Test
     public void lic2IsTrueInNormalCase()
     {
@@ -564,6 +579,36 @@ public class Tests {
         decide.lic2();
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void lic2ThrowsExceptionWhenEpsilonIsTooSmall(){
+        decide.PARAMETERS.EPSILON = -1;
+        decide.NUMPOINTS = 6;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(20,20),
+            new Point2D.Double(19,19),
+            new Point2D.Double(18,19),
+            new Point2D.Double(17,17),
+            new Point2D.Double(17,15),
+            new Point2D.Double(16,10)
+        };
+        decide.lic2();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void lic2ThrowsExceptionWhenEpsilonIsTooBig(){
+        decide.PARAMETERS.EPSILON = 5;
+        decide.NUMPOINTS = 6;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(20,20),
+            new Point2D.Double(19,19),
+            new Point2D.Double(18,19),
+            new Point2D.Double(17,17),
+            new Point2D.Double(17,15),
+            new Point2D.Double(16,10)
+        };
+        decide.lic2();
+    }
+
     @Test
     public void lic3IsTrueInNormalCase()
     {
@@ -601,6 +646,21 @@ public class Tests {
         decide.COORDINATES = new Point2D[]{
             new Point2D.Double(0,0),
             new Point2D.Double(1,1),
+        };
+        decide.lic3();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void lic3ThrowsExceptionWhenAreaIsInvalid(){
+        decide.PARAMETERS.AREA1 = -1;
+        decide.NUMPOINTS = 6;
+        decide.COORDINATES = new Point2D[]{
+            new Point2D.Double(20,20),
+            new Point2D.Double(18,18),
+            new Point2D.Double(10,18),
+            new Point2D.Double(10,10),
+            new Point2D.Double(8,4),
+            new Point2D.Double(2,0)
         };
         decide.lic3();
     }
